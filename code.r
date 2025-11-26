@@ -321,6 +321,8 @@ nested_res = resample(
 
 plan("sequential")
 
+rf_tuned <- rf_at$train(task_data)
+
 nested_res$aggregate()
 autoplot(nested_res)
 
@@ -439,4 +441,4 @@ importance$plot()
 mes_class = msrs(c("classif.ce", "classif.acc", "classif.precision"))
 bmr_class = bm_class$aggregate(mes_class)
 bmr_class[, c(4,7:9)]
-autoplot(bm_class, measure = msr("classif.ce")) 
+autoplot(bm_class, measure = msr("classif.ce"))

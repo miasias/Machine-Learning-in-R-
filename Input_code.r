@@ -1,7 +1,13 @@
-##########################################
-# This script defines functions to safely collect and validate user input, converts the input into a data.table compatible
-# with mlr3, and uses the tuned Random Forest model to generate a heart-disease prediction for the new person.
-##########################################
+###############################################
+# Application of the tuned Random forest model#
+###############################################
+
+#This code defines functions to safely collect and validate user input, converts the input into a data.table compatible
+#with mlr3, and uses the tuned Random Forest model to generate a heart-disease prediction for the new person.
+
+#Run the code and then insert your own values into the console for every predictor. 
+#The model will then predict the risk for a cardiovascular disease.
+
 library(data.table)
 
 # Create function to test integer input with optional bounds
@@ -111,7 +117,11 @@ predict_new_person <- function() {
   # Convert User input into a data table format
   new_person_dt <- as.data.table(new_person)
   # Using the created data table we make a prediction using the tuned model
-  prediction_new <- rf_tuned$predict_newdata(newdata = new_person_dt)
+  prediction_new <- rf_tuned$predict_newdata(
+    task = task_data,              # manual task passed here
+    newdata = new_person_dt
+  )
+  
   cat("\n---- Prediction for new person ----\n")
   # Print and return the prediction 
   print(prediction_new)
@@ -119,6 +129,6 @@ predict_new_person <- function() {
 }
 
 # Call the function above as a test
-predict_new_person()
-
+  
+  predict_new_person()
 
